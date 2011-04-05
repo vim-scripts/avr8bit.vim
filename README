@@ -2,4 +2,5 @@ This is a mirror of http://www.vim.org/scripts/script.php?script_id=3516
 
 Syntax highlighting for Atmel 8bit MCU 
 for M8, M16, Tiny2313, M48, M88, M168, 4434, 8535 
-164, 324, 644, 1284
+M164, M324, M644, M1284
+Tiny10, Tiny11, Tiny12, Tiny13, Tiny26, Tiny24, Tiny44, Tiny84
