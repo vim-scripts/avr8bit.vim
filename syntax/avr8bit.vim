@@ -1,13 +1,13 @@
 " Vim syntax file
 " Language:     Avr 8bit Assembler (Atmel's microcontroller)
 " Maintainer:   Alfred Hell <alhell@gmx.net>
-" Last Change:  2011 May 18
-" Revision:     0.7
+" Last Change:  2011 May 30
+" Revision:     0.8
 " for M8, M16, M162, M48, M88, M168, 4434, 8535
 " M164 M324 M644 M1284 M165 M325 M3250 M645 M6450
 " M32 M64 M128
 " Tiny26 Tiny10 Tiny11 Tiny12 Tiny13
-" Tiny24 Tiny44 Tiny84 Tiny2313 Tiny25 Tiny45 Tiny85
+" Tiny24 Tiny44 Tiny84 ATTiny2313 Tiny261 Tiny461 Tiny861
 
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
@@ -40,11 +40,11 @@ syn match avrComment    	";.*" contains=avrTodo
 syn region avrString    	start=+"+ end=+"+
 
 " REGISTER
-syn keyword avrRegister		SREG SPH SPL SPMCR ASSR WDTCR SMCR XDIV
+syn keyword avrRegister		SREG SPH SPL SPMCR ASSR WDTCR SMCR XDIV ACSRA
 syn keyword avrRegister		MCUCR MCUCSR OSCCAL OCDR SFIOR ACSR EMCUCR
 syn keyword avrRegister		SPMCSR MCUSR CLKPR DIDR DIDR0 DIDR1 XMCRA
 syn keyword avrRegister		GTCCR  GPIOR2 GPIOR1 GPIOR0 SP DWDR XMCRB
-syn keyword avrRegister		RAMPZ PLLCSR DT1A DT1B DTPS1 PRR
+syn keyword avrRegister		RAMPZ PLLCSR DT1A DT1B DTPS1 PRR DT1 ACSRB
 
 " EEPROM
 syn keyword avrRegister         EEARH EEARL EEDR EECR EEAR
@@ -61,12 +61,12 @@ syn keyword avrRegister		EIMSK PCIFR TIFR0 TIFR1 TIFR2 ETIMSK ETIFR EICRB
 
 " TiCou
 syn keyword avrRegister         TCCR1A TCCR1B TCNT1H TCNT1L OCR1AH OCR1AL OCR1BH 
-syn keyword avrRegister         OCR1BL ICR1H ICR1L TCCR2 TCNT2 OCR2 TCCR0 TCNT0 
+syn keyword avrRegister         OCR1BL ICR1H ICR1L TCCR2 TCNT2 OCR2 TCCR0 TCNT0 TCCR1E
 syn keyword avrRegister         GIMSK ICR1H ICR1L TCCR0B TCCR0A TCCR1C OCR0 TCCR1
 syn keyword avrRegister         OCR0B OCR0A OCR2A OCR2B TCCR2A TCCR2B OCR1C TCNT1
 syn keyword avrRegister         OCR3BH OCR3AH OCR3AL OCR3BL TCCR3A TCCR3B TCCR3C
 syn keyword avrRegister         TCNT3H TCNT3L ICR3H ICR3L OCR3CL OCR3CH OCR1CH OCR1CL
-syn keyword avrRegister         OCR1A OCR1B
+syn keyword avrRegister         OCR1A OCR1B TCCR1D TCCR0B TCNT0L OCR1D TC1H TCNT0H
 
 " UART
 syn keyword avrRegister         UDR UDR1 UDR0 UCSRA UCSRB UBRRL UCSRC UBRRH UBRR1H
@@ -77,7 +77,7 @@ syn keyword avrRegister		UCSR0B UCSR0A
 syn keyword avrRegister         ADMUX ADCSRA ADCSRB ADCH ADCL 
 
 " USI
-syn keyword avrRegister         USIDR USISR USICR USIBR
+syn keyword avrRegister         USIDR USISR USICR USIBR USIPP 
 
 " SPI
 syn keyword avrRegister         SPDR SPSR SPCR 
@@ -91,9 +91,7 @@ syn keyword avrRegister 	ZL ZH YL YH XL XH
 
 
 " REGISTER BITS
-syn match avrRegisterPart	"PCINT[0-9]"
-syn match avrRegisterPart	"PCINT[1-2][0-9]"
-syn match avrRegisterPart	"PCINT3[0-1]"
+syn match avrRegisterPart	"\<PCINT\([0-9]\|[1-2][0-9]\|3[0-1]\)\>"
 syn match avrRegisterPart	"CAL[0-7]"
 syn match avrRegisterPart	"TWA[0-6]"
 syn match avrRegisterPart	"TWS[0-7]"
@@ -102,7 +100,7 @@ syn match avrRegisterPart	"PORT[A-J][0-7]"
 syn match avrRegisterPart	"DDR[A-J][0-7]"
 syn match avrRegisterPart	"PIN[A-J][0-7]"
 syn match avrRegisterPart	"P[A-J][0-7]"
-syn match avrRegisterPart	"ADC[0-7]D"
+syn match avrRegisterPart	"\<ADC\([0-9]D\|10D\)\>"
 syn match avrRegisterPart	"MUX[0-5]"
 syn match avrRegisterPart	"CLKPS[0-3]"
 syn match avrRegisterPart	"EEAR[0-8]"
@@ -110,10 +108,15 @@ syn match avrRegisterPart	"XDIV[0-6]"
 syn match avrRegisterPart	"ISC[0-7][0-1]"
 syn match avrRegisterPart	"INT[0-7]"
 syn match avrRegisterPart	"INTF[0-7]"
-syn match avrRegisterPart	"SP[0-9]"
-syn match avrRegisterPart	"DT1[A-B]H[0-3]"
-syn match avrRegisterPart	"DT1[A-B]L[0-3]"
+syn match avrRegisterPart	"SP[0-9]\|10"
+syn match avrRegisterPart	"\<DT1\([A-B]H[0-3]\|[A-B]L[0-3]\|H[0-3]\|L[0-3]\)\>"
+syn match avrRegisterPart	"DT1L[0-3]"
 syn match avrRegisterPart	"DWDR[0-7]"
+syn match avrRegisterPart	"WDP[0-3]"
+syn match avrRegisterPart	"USICNT[0-3]"
+syn match avrRegisterPart	"ACM[0-2]"
+syn match avrRegisterPart	"ADPS[0-2]"
+syn match avrRegisterPart	"OC1OE[0-5]"
 
 " eeprom
 syn keyword avrRegisterPart     EERIE EEMWE EEWE EERE 
@@ -130,11 +133,11 @@ syn keyword avrRegisterPart	UCSZ12 RXB81 TXB81 RXC1 TXC1 UDRE1 FE1 DOR1 UPE1 U2X
 syn keyword avrRegisterPart	MPCM1 UCSZ01 UCSZ00
 
 " On Chip Debug Register
-syn keyword avrRegisterPart     ACD ACBG ACO ACI ACIE ACIC ACIS1 ACIS0 
+syn keyword avrRegisterPart     ACD ACBG ACO ACI ACIE ACIC ACIS1 ACIS0 ACIC0 ACME 
 
 " ADC
-syn keyword avrRegisterPart     REFS1 REFS0 ADLAR BIN REFS2
-syn keyword avrRegisterPart     ADEN ADSC ADATE ADIF ADIE ADPS2 ADPS1 ADPS0 
+syn keyword avrRegisterPart     REFS1 REFS0 ADLAR BIN REFS2 GSEL AREFD
+syn keyword avrRegisterPart     ADEN ADSC ADATE ADIF ADIE 
 syn keyword avrRegisterPart     ADTS2 ADTS1 ADTS0  
 
 " TWI				
@@ -143,9 +146,8 @@ syn keyword avrRegisterPart     SPIE SPE DORD MSTR CPOL CPHA SPR1 SPR0 CPOL0
 syn keyword avrRegisterPart     TWSTO TWWC TWEN TWIE SPIE0 SPE0 DORD0 MSTR0
 syn keyword avrRegisterPart     TWINT TWEA TWSTA TWSTO TWWC TWEN TWIE SPR00 SPR01
 
-
 " TimerCounter
-syn keyword avrRegisterPart     OCIE2 OCIE3C FOC1C
+syn keyword avrRegisterPart     OCIE2 OCIE3C FOC1C OCIE1D OCIE0A OCIE0B TICIE0 ICF0
 syn keyword avrRegisterPart     TOIE2 TICIE1 OCIE1A OCIE1B TOIE1 OCIE0 TOIE0 OCF2
 syn keyword avrRegisterPart     TOV2 ICF1 OCF1A OCF1B TOV1 OCF0 TOV0 TICIE3 TOIE3
 syn keyword avrRegisterPart     FOC0 COM01 COM00 CS02 CS01 CS00 PSR10 PSR0 PSR1
@@ -154,28 +156,30 @@ syn keyword avrRegisterPart     ICNC1 ICES1 WGM13 WGM12 CS12 CS11 CS10 CS13 OCIE
 syn keyword avrRegisterPart     FOC2 WGM20 COM21 COM20 WGM21 CS22 CS21 CS20 OCIE3B
 syn keyword avrRegisterPart     AS2 TCN2UB OCR2UB TCR2UB PSR2 FOC2A FOC2B WGM22 ICF3
 syn keyword avrRegisterPart     TWINT TWEA TWSTA SPMIE RWWSB PWM1A PWM1B CTC1 TOV3
-syn keyword avrRegisterPart     ICIE1 OCIE0A OCIE0B OCF0A OCF0B RFLB FOC0B WGM02 
+syn keyword avrRegisterPart     ICIE1 OCIE0A OCIE0B OCF0A OCF0B RFLB FOC0B WGM02 CTC0
 syn keyword avrRegisterPart     WGM01 WGM00 COM0A1 COM0A0 COM0B0 COM0B1 PCIE0 PCIE
 syn keyword avrRegisterPart     CLKPCE FOC0A OCIE2B OCIE2A PCIE2 PCIE1 FOC3A FOC3B FOC3C
 syn keyword avrRegisterPart     TCN2UB OCR2AUB OCR2BUB TCR2AUB TCR2BUB OCF2B OCF2A
 syn keyword avrRegisterPart	COM2A1 COM2A0 COM2B1 COM2B0 COM3A1 COM3A0 COM3B1 COM3B0
 syn keyword avrRegisterPart	WGM31 WGM30 WGM32 WGM33 ICNC3 ICES3 CS32 CS31 CS30
 syn keyword avrRegisterPart	OCF3A OCF3B COM3C0 COM3C1 OCF3C OCF1C OCF2C OCIE1C
+syn keyword avrRegisterPart	OCF1D PWM1X COM1A1S COM1A0S COM1B0S COM1B1S COM1D1
+syn keyword avrRegisterPart	COM1D0 FOC1D PWM1D FPIE1 FPEN1 FPNC1 FPES1 FPAC1 FPF1
+syn keyword avrRegisterPart	TC19 TC18 TCW0 ICEN0 ICNC0 ICES0
 
 " other
 syn keyword avrRegisterPart     SM2 SE SM1 SM0 PCKE PLLE PLOCK SM AINBG LSM IPR
 syn keyword avrRegisterPart     JTD ISC2 JTRF WDRF BORF EXTRF PORF DTPS11 DTPS10
-syn keyword avrRegisterPart     ADTS2 ADTS1 ADTS0 ADHSM ACME PUD CTPB SRL2 SRL1 SRL0
-syn keyword avrRegisterPart     WDTOE WDE WDP2 WDP1 WDP0 UCSZ1 UCSZ0 UCPOL RSIG 
-syn keyword avrRegisterPart     PCIF RFLB WDIF WDIE WDP3 RWWSRE BLBSET PGWRT PGERS SPMEN 
+syn keyword avrRegisterPart     ADTS2 ADTS1 ADTS0 ADHSM PUD CTPB SRL2 SRL1 SRL0
+syn keyword avrRegisterPart     WDTOE WDE UCSZ1 UCSZ0 UCPOL RSIG HSEL HLEV 
+syn keyword avrRegisterPart     PCIF RFLB WDIF WDIE RWWSRE BLBSET PGWRT PGERS SPMEN 
 syn keyword avrRegisterPart     WDCE USISF USIOIF USIPF USIDC JRTF USISIF 
-syn keyword avrRegisterPart     USICNT3 USICNT2 USICNT1 USICNT0 USISIE USIOIE USIWM1
+syn keyword avrRegisterPart     USISIE USIOIE USIWM1 PRADC SELFPRGEN
 syn keyword avrRegisterPart     USIWM0 USICS1 USICS0 USICLK USITC AIN1D AIN0D PRUSI
 syn keyword avrRegisterPart     TWS3 TWPS1 TWPS0 EXCLK AS2 TWBR TWSR TWGCEADFR
 syn keyword avrRegisterPart     PRTWI PRTIM2 PRTIM0 PRTIM1 PRSPI PRUSART0 SIGRD
-syn keyword avrRegisterPart     PRADC SELFPRGEN
 syn keyword avrRegisterPart     IVSEL IVCE TSM PSRASY PSRSYNC JDT BODS BODSE PCIF3
-syn keyword avrRegisterPart     PCIF2 PCIF1 PCIF0 RAMPZ0
+syn keyword avrRegisterPart     PCIF2 PCIF1 PCIF0 RAMPZ0 ISC00 ISC01
 syn keyword avrRegisterPart     SRW00 SRW01 SRW11 ICS2 XMBK XMM2 XMM1 XMM0 XDIVEN
 
 
