@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:     Avr 8bit Assembler (Atmel's microcontroller)
 " Maintainer:   Alfred Hell <alhell@gmx.net>
-" Last Change:  2011 May 30
-" Revision:     0.8
+" Last Change:  2011 Jun 5
+" Revision:     0.81
 " for M8, M16, M162, M48, M88, M168, 4434, 8535
 " M164 M324 M644 M1284 M165 M325 M3250 M645 M6450
 " M32 M64 M128
@@ -108,7 +108,7 @@ syn match avrRegisterPart	"XDIV[0-6]"
 syn match avrRegisterPart	"ISC[0-7][0-1]"
 syn match avrRegisterPart	"INT[0-7]"
 syn match avrRegisterPart	"INTF[0-7]"
-syn match avrRegisterPart	"SP[0-9]\|10"
+syn match avrRegisterPart	"\<SP\([0-9]\|10\)\>"
 syn match avrRegisterPart	"\<DT1\([A-B]H[0-3]\|[A-B]L[0-3]\|H[0-3]\|L[0-3]\)\>"
 syn match avrRegisterPart	"DT1L[0-3]"
 syn match avrRegisterPart	"DWDR[0-7]"
