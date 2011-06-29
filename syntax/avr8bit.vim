@@ -1,9 +1,9 @@
 " Vim syntax file
 " Language:     Avr 8bit Assembler (Atmel's microcontroller)
 " Maintainer:   Alfred Hell <alhell@gmx.net>
-" Last Change:  2011 Jun 5
-" Revision:     0.81
-" for M8, M16, M162, M48, M88, M168, 4434, 8535
+" Last Change:  2011 June 29
+" Revision:     0.9
+" for M8, M16, M162, M48, M88, M168, M328, 4434, 8535
 " M164 M324 M644 M1284 M165 M325 M3250 M645 M6450
 " M32 M64 M128
 " Tiny26 Tiny10 Tiny11 Tiny12 Tiny13
@@ -105,7 +105,7 @@ syn match avrRegisterPart	"MUX[0-5]"
 syn match avrRegisterPart	"CLKPS[0-3]"
 syn match avrRegisterPart	"EEAR[0-8]"
 syn match avrRegisterPart	"XDIV[0-6]"
-syn match avrRegisterPart	"ISC[0-7][0-1]"
+syn match avrRegisterPart	"\<ISC\([0-2]\|[0-7][0-1]\)\>"
 syn match avrRegisterPart	"INT[0-7]"
 syn match avrRegisterPart	"INTF[0-7]"
 syn match avrRegisterPart	"\<SP\([0-9]\|10\)\>"
@@ -169,7 +169,7 @@ syn keyword avrRegisterPart	TC19 TC18 TCW0 ICEN0 ICNC0 ICES0
 
 " other
 syn keyword avrRegisterPart     SM2 SE SM1 SM0 PCKE PLLE PLOCK SM AINBG LSM IPR
-syn keyword avrRegisterPart     JTD ISC2 JTRF WDRF BORF EXTRF PORF DTPS11 DTPS10
+syn keyword avrRegisterPart     JTD JTRF WDRF BORF EXTRF PORF DTPS11 DTPS10
 syn keyword avrRegisterPart     ADTS2 ADTS1 ADTS0 ADHSM PUD CTPB SRL2 SRL1 SRL0
 syn keyword avrRegisterPart     WDTOE WDE UCSZ1 UCSZ0 UCPOL RSIG HSEL HLEV 
 syn keyword avrRegisterPart     PCIF RFLB WDIF WDIE RWWSRE BLBSET PGWRT PGERS SPMEN 
@@ -179,7 +179,7 @@ syn keyword avrRegisterPart     USIWM0 USICS1 USICS0 USICLK USITC AIN1D AIN0D PR
 syn keyword avrRegisterPart     TWS3 TWPS1 TWPS0 EXCLK AS2 TWBR TWSR TWGCEADFR
 syn keyword avrRegisterPart     PRTWI PRTIM2 PRTIM0 PRTIM1 PRSPI PRUSART0 SIGRD
 syn keyword avrRegisterPart     IVSEL IVCE TSM PSRASY PSRSYNC JDT BODS BODSE PCIF3
-syn keyword avrRegisterPart     PCIF2 PCIF1 PCIF0 RAMPZ0 ISC00 ISC01
+syn keyword avrRegisterPart     PCIF2 PCIF1 PCIF0 RAMPZ0 
 syn keyword avrRegisterPart     SRW00 SRW01 SRW11 ICS2 XMBK XMM2 XMM1 XMM0 XDIVEN
 
 
