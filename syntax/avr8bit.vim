@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:     Avr 8bit Assembler (Atmel's microcontroller)
 " Maintainer:   Alfred Hell <alhell@gmx.net>
-" Last Change:  2013 Sept. 26
-" Revision:     1.2
+" Last Change:  2015 04 30
+" Revision:     1.21
 " for M8, M16, M162, M48, M88, M168, M328, 4434, M8535, M8515
 " M164 M324 M644 M1284 M165 M325 M3250 M645 M6450
 " M32 M64 M128 M640 M1280 M1281 M2560 M2561
@@ -202,7 +202,7 @@ syn keyword avrRegisterPart     PCIF RFLB WDIF WDIE RWWSRE BLBSET PGWRT PGERS SP
 syn keyword avrRegisterPart     WDCE USISF USIOIF USIPF USIDC JRTF USISIF 
 syn keyword avrRegisterPart     USISIE USIOIE USIWM1 PRADC SELFPRGEN
 syn keyword avrRegisterPart     USIWM0 USICS1 USICS0 USICLK USITC AIN1D AIN0D PRUSI
-syn keyword avrRegisterPart     TWS3 TWPS1 TWPS0 EXCLK AS2 TWBR TWSR TWGCEADFR
+syn keyword avrRegisterPart     TWS3 TWPS1 TWPS0 EXCLK AS2 TWGCEADFR
 syn keyword avrRegisterPart     IVSEL IVCE TSM PSRASY PSRSYNC JDT BODS BODSE 
 syn keyword avrRegisterPart     RAMPZ0 RAMPZ1 SRW11 SRW10 PRTWI PRSPI SIGRD
 syn keyword avrRegisterPart     SRW00 SRW01 SRW11 ICS2 XMBK XMM2 XMM1 XMM0 XDIVEN
